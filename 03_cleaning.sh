@@ -1,5 +1,7 @@
 # for metaphlan4
 
+#singularity exec --bind /nfs/data/projects/healthy_enable_2023 /nfs/data/TOOLs/singularity/images/samtools.sif bash /nfs/data/projects/healthy_enable_2023/mgx-reference/03_cleaning.sh
+
 output_file="progr_info.txt"
 if [ -e $output_file ]; then
   echo "File $output_file already exists!"
@@ -13,8 +15,9 @@ else
     echo "Failed to retrieve the version information."
 fi
 
+prj_name=healthy_enable_2023
 
-sam_dir=/nfs/data/projects/PCOS_Qi_2019/analysis/metaphlan4/sam
+sam_dir=/nfs/data/projects/${prj_name}/analysis/metaphlan4/sam
 
 cd $sam_dir;
 
@@ -30,4 +33,6 @@ sorted_bam_fp=${sample_id}.sorted.bam
 samtools view -u $sam_fp | samtools sort -o $sorted_bam_fp
 
 done
+
+#rm -r ${sam_dir}/*.sam
 
