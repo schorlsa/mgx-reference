@@ -35,8 +35,11 @@
 
 ### now version 4 [MetaPhlAn version 4.0.2 (22 Sep 2022)]
 
+echo "Running with parameter: $1"
+
 metaphlan --version
-prj_name=PCOS_Qi_2019
+#prj_name=PCOS_Qi_2019
+prj_name=$1
 R1_suffix=_R1.fq.gz
 R2_suffix=_R2.fq.gz
 
@@ -64,7 +67,19 @@ do
 		--nproc 20 --input_type fastq -t rel_ab_w_read_stats -s ${sam_dir}/${cur_sample_id}.sam  > ${profile_dir}/${cur_sample_id}.profile.txt;
 done
 
-echo "This is end of script"
+echo "MetaPhlAn run done"
 metaphlan --version
 
+#write metaphlan version to output file
+output_file="progr_info.txt"
+if [ -e $output_file ]; then
+  echo "File $output_file already exists!"
+else
+  metaphlan --version >> $output_file
+fi
 
+if [ $? -eq 0 ]; then
+    echo "Version information has been written to $output_file"
+else
+    echo "Failed to retrieve the version information."
+fi
