@@ -1,6 +1,6 @@
 # for metaphlan4
 
-#singularity exec --bind /nfs/data/projects/healthy_enable_2023 /nfs/data/TOOLs/singularity/images/samtools.sif bash /nfs/data/projects/healthy_enable_2023/mgx-reference/03_cleaning.sh
+#singularity exec --bind /nfs:/nfs /nfs/data/TOOLs/singularity/images/samtools.sif bash ~/mgx-reference/03_cleaning.sh mgx_michael_2023
 
 output_file="progr_info.txt"
 if [ -e $output_file ]; then
